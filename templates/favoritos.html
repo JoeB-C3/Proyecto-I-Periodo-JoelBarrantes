@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo_principal.css') }}">
+    <title>Contactos Favoritos</title>
+</head>
+<body>
+    <section class="container_botones">
+        <img src="/static/img/logo_entrada_opcion2.png" alt="logo_entrada" id="logo_entrada">
+        <h1>Cont<b id="li">Li</b></h1>
+
+        <a href="/principal" class="bt" id="boton_agregar" style="text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center;">Volver al Inicio</a>
+        <button type="button" class="bt" id="boton_cerrarSecion" onclick="window.location.href='/'">Cerrar Sesión</button>
+    </section>
+
+    <div id="linea_divisora"></div>
+
+    <section class="bandeja_entrada">
+        <div id="campo_busqueda">
+            <form method="get" action="/favoritos">
+                <button type="submit" id="boton_buscar">
+                    <img src="/static/img/simbolo-de-la-interfaz-de-busqueda.png" id="icono_busqueda">
+                </button>
+                <input type="text" id="searchInput" class="search-bar__input" placeholder="Buscar en favoritos...">
+            </form>
+        </div>
+
+        <div id="cont_contactos">
+            <p id="cant_contactos">Favoritos: {{ contactos|length }}</p>
+            
+            <div id="cont_tabla">
+                <table id="lista_contactos">
+                    <thead>
+                        <tr>
+                            <th scope="col">Contacto</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Categoría</th>
+                            <th scope="col">Acciones</th>   
+                        </tr>
+                    </thead>
+                    <tbody id="contactsTableBody">
+                        {% for contacto in contactos %}
+                        <tr>
+                            <td class="contact-name"><strong>{{ contacto.nombre }} {{ contacto.apellido }}</strong></td>
+                            <td>{{ contacto.telefono }}</td>
+                            <td>{{ contacto.correo }}</td>
+                            <td>{{ contacto.categoria }}</td>
+                            <td>
+                                <a href="/detalle_contacto/{{ contacto.id }}" class="btn-ver">Ver Detalle</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/logica_principal.js') }}"></script>
+</body>
+</html>

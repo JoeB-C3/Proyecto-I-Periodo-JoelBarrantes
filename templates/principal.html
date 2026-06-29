@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo_principal.css') }}">
+    <title>Pagina Principal</title>
+</head>
+<body>
+    <!--sección que contiene el título principal, logo y botones para moverse de pagina-->
+    <section class="container_botones">
+
+        <img src="/static/img/logo_entrada_opcion2.png" alt="logo_entrada" id="logo_entrada">
+
+        <!--titulo principal-->
+        <h1>Cont<b id="li">Li</b></h1>
+
+        <a href="{{ url_for('agregar_contacto') }}" class="bt" id="boton_agregar">Agregar Contacto</a>
+
+        <a href="{{ url_for('favoritos') }}" class="bt" id="boton_favoritos">Favoritos</a>
+
+        <a href="{{ url_for('reporte_general') }}" class="bt" id="boton_reporte">Reporte General</a>
+
+        <a href="{{ url_for('inicio') }}" class="bt" id="boton_cerrarSecion">Cerrar Sesión</a>
+    </section>
+
+    <!-- línea vertical que separa en 2 columnas la pagina principal-->
+    <div id="linea_divisora"></div>
+
+    <!--bandeja de entrada-->
+    <section class="bandeja_entrada">
+
+        <!--campo de busqueda de los contactos con el uso de funciones flask-->
+        <div id="campo_busqueda">
+            <form method="get" action="{{ url_for('principal') }}">
+
+                <button type="submit" id="boton_buscar">
+                    <img src="/static/img/simbolo-de-la-interfaz-de-busqueda.png" id="icono_busqueda">
+                </button>
+
+                <input
+                type="text"
+                id="searchInput"
+                placeholder="Buscar contacto..."
+                />
+
+            </form>
+        </div>
+
+        <!--contenedor de la tabla de contactos-->
+        <div id="cont_contactos">
+
+            <!--texto que indicara cuantos contactos hay registrados-->
+            <p id="contactCount">Contactos {{ contactos|length }}</p>
+
+            <button id="sortBtn">A-Z</button>
+            
+            <div id="tableWrapper" style="width: 100%;">
+                <table id="lista_contactos">
+                    <thead>
+                        <tr>
+                            <th scope="col">Contacto</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Acciones</th>   
+                        </tr>
+                    </thead>
+                    <!--se crea un tabla dinamica que toma los valores de ingresados para crear nuevas final-->
+                    <tbody id="contactsTableBody">
+                        {% for c in contactos %}
+                        <tr>
+                            <td>
+                                <span class="contact-name">{{ c.nombre }} {{ c.apellido }}</span>
+                            </td>
+                            <td>{{ c.telefono }}</td>
+                            <td>{{ c.correo }}</td>
+                            <td>{{ c.favorito }}</td>
+                            <!--boton que conecta con la pagina de dellate_contacto del contacto escogido-->
+                            <td>
+                                <a href="{{ url_for('detalle_contacto', row_id=c.id) }}" class="bt-accion" style="color: #0F5199; text-decoration: none; font-weight: bold;">Ver Más</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!--mensaje que se imprime en pantalla si es que no se encuentran contactos-->
+            <div id="emptyState" style="display: none; grid-column: span 2; text-align: center; padding: 20px; color: #666;">
+                <p>No hay contactos disponibles.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!--se conecta con el javascript-->
+    <script src="{{ url_for('static', filename='js/logica_principal.js') }}"></script>
+</body>
+</html>

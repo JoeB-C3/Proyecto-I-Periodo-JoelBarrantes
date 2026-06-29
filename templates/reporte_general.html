@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--utiliza la misma hoja de estilos que la pagina principal-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo_principal.css') }}">
+    <title>Reporte General del Sistema</title>
+    <style>
+        /* Estilos específicos para la sección del reporte*/
+        h2{
+            font-size: 30px;
+            font-weight: bolderSS;
+        }
+
+        .grid-reporte {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .tarjeta-metrica {
+            background: #F8F9FA;
+            border-left: 5px solid #0F5199;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .tarjeta-metrica.favs {
+            border-left-color: #287233;
+        }
+        .tarjeta-metrica h3 { margin: 0 0 10px 0; color: #333; font-size: 18px; }
+        .tarjeta-metrica p { margin: 0; font-size: 32px; font-weight: bold; color: #0F5199; }
+        .tarjeta-metrica.favs p { color: #287233; }
+    </style>
+</head>
+<body>
+    <!--contenedor del logo, nombre y botones para transportarce-->
+    <section class="container_botones">
+        <img src="/static/img/logo_entrada_opcion2.png" alt="logo_entrada" id="logo_entrada">
+        <h1>Cont<b id="li">Li</b></h1>
+
+        <a href="/principal" class="bt" id="boton_agregar" style="text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center;">Volver al Inicio</a>
+        <button type="button" class="bt" id="boton_cerrarSecion" onclick="window.location.href='/'">Cerrar Sesión</button>
+    </section>
+
+    <!--línea divisora que separa la pagina en 2 columnas-->
+    <div id="linea_divisora"></div>
+
+    <!--bandeja con las tarjetas de información-->
+    <section class="bandeja_entrada">
+        <div style="padding-top: 40px;">
+            <h2>Resumen Estadístico de Contactos</h2>
+            <p>Métricas en tiempo real calculadas desde el archivo de datos.</p>
+            
+            
+            <div class="grid-reporte">
+                <!--tarjeta que indica la cantidad de usuarios totales-->
+                <div class="tarjeta-metrica">
+                    <h3>Total de Contactos</h3>
+                    <p>{{ total_contactos }}</p>
+                </div>
+
+                <!--tarjeta que indica la cantidad de usuarios con el tipo favorito-->
+                <div class="tarjeta-metrica favs">
+                    <h3>Contactos Favoritos</h3>
+                    <p>{{ total_favoritos }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

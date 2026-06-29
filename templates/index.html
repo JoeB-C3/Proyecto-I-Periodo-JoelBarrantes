@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo_index.css') }}">
+    <title>Login</title> 
+</head>
+<body>
 
+    <!--se realizan realizan condicionales para generar un mensaje de alerta si el usuario o contraseña son incorrectos-->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <script>
+              alert("⚠️ Error: {{ message }}");
+          </script>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!--Campo para el logo principal-->
+    <div class="logo">
+        <img src="/static/img/logo_login.png" alt="logo_login" id="logo_login">
+    </div>
+    
+    <!--campo del fomulario-->
+    <div class="login-container">
+        <h1>Iniciar Sesión</h1>
+
+        <!--el formulario utiliza en motodo POST para conectarlo con el python-->
+        <form method="POST" action="{{ url_for('inicio') }}" id="formLogin">
+
+            <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
+
+            <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+
+            <button type="submit" class="btn-enviar">Ingresar</button>
+        </form>
+
+    </div>
+
+    <!--se conceta el javascript-->
+    <script src="{{ url_for('static', filename='js/logica_index.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo_agregar_contacto.css') }}">
+    <title>Agregar Contacto</title>
+</head>
+<body>
+    <!--encabezado con el título y botones de volver o guardar-->
+    <header>
+        <a href="/principal" class="back-btn" aria-label="Volver a inicio">
+            <span class="back-btn__arrow">←</span>
+            <span>Volver</span>
+        </a>
+
+        <h1>Agregar Contacto</h1>
+
+        <button id="guardar" type="submit" form="formNuevoContacto">Guardar</button>
+    </header>
+
+    <main>
+
+            <!--Vista de avatar que se modifica con uso de js -->
+            <div class="avatar-preview-wrap">
+                <div class="avatar-preview" id="avatarPreview">
+                    <span id="avatarInitials">?</span>
+                </div>
+                <p>Imagen de Pérfil</p>
+            </div>
+
+            <!--formulario para introducir la información deseada-->
+            <form
+                id="formNuevoContacto"
+                action="{{ url_for('agregar_contacto') }}"
+                method="POST"
+                novalidate
+            >
+                <div class="form-grid">
+
+                    <!-- Nombre -->
+                    <div class="form-group">
+                        <label class="form-label" for="nombre">
+                            Nombre <span class="required">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="txtNombre"
+                            class="form-input"
+                            placeholder="Ej: Ana"
+                            maxlength="50"
+                            autocomplete="given-name"
+                        />
+
+                    </div>
+
+                    <!-- Apellido -->
+                    <div class="form-group">
+                        <label class="form-label" for="apellido">
+                            Apellido
+                        </label>
+                        <input
+                            type="text"
+                            id="apellido"
+                            name="txtApellido"
+                            class="form-input"
+                            placeholder="Ej: Mora"
+                            maxlength="50"
+                            autocomplete="family-name"
+                        />
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div class="form-group">
+                        <label class="form-label" for="telefono">
+                            Teléfono <span class="required">*</span>
+                        </label>
+                        <!-- en el imput se establecen parametros para la verificación de requerimientos-->
+                        <input
+                            type="tel"
+                            id="telefono"
+                            name="txtTelefono"
+                            class="form-input"
+                            placeholder="Ej: 88881234"
+                            maxlength="8"
+                            inputmode="numeric"
+                            pattern="[0-9]{8}"
+                        />
+                        <span class="form-hint">Exactamente 8 dígitos, sin guiones.</span>
+                        <span class="form-error" id="errorTelefono"></span>
+                    </div>
+
+                    <!-- Correo -->
+                    <div class="form-group">
+                        <label class="form-label" for="correo">
+                            Correo electrónico <span class="required">*</span>
+                        </label>
+                        <input
+                            type="email"
+                            id="correo"
+                            name="txtCorreo"
+                            class="form-input"
+                            placeholder="Ej: ana@correo.com"
+                            maxlength="100"
+                            autocomplete="email"
+                        />
+                        <span class="form-error" id="errorCorreo"></span>
+                    </div>
+
+                </div><!-- /.form-grid -->
+
+                <div class="form-grid">
+
+                    <!-- Dirección -->
+                    <div class="form-group form-group--full">
+                        <label class="form-label" for="direccion">Dirección</label>
+                        <textarea
+                            id="direccion"
+                            name="txtDireccion"
+                            class="form-input form-textarea"
+                            placeholder="Ej: San José, Costa Rica"
+                            rows="2"
+                            maxlength="200"
+                        ></textarea>
+                    </div>
+
+                    <!-- Categoría con uso de select-->
+                    <div class="form-group">
+                        <label class="form-label" for="categoria">Categoría</label>
+                        <div class="select-wrapper">
+                            <select id="categoria" name="txtCategoria" class="form-input form-select">
+                                <option value="" disabled selected>Seleccionar…</option>
+                                <option value="Familia">Familia</option>
+                                <option value="Trabajo">Trabajo</option>
+                                <option value="Amigos">Amigos</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Favorito -->
+                    <div class="form-group">
+                        <label class="form-label">Tipo de contacto</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                            <input
+                                type="radio"
+                                name="chkFavorito"
+                                value="normal"
+                                class="radio-input"
+                                checked
+                            />
+                            <span class="radio-custom"></span>
+                            <span>Normal</span>
+                            </label>
+                            <label class="radio-label radio-label--star">
+                            <input
+                                type="radio"
+                                name="chkFavorito"
+                                value="favorito"
+                                class="radio-input"
+                            />
+                            <span class="radio-custom"></span>
+                            <span>Favorito</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div><!-- /.form-grid -->
+            </form>
+
+    </main>
+
+    <!--modal ocualto que funciona como tarjeta de advertenciam en ves de usar alert-->
+    <div id="modalAdvertencia" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>¡Advertencia!</h2>
+            </div>
+            <div class="modal-body">
+                <p id="mensajeModal">Faltan datos obligatorios o el formato no es válido.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cerrarModal" class="btn-cerrar">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/logica_agregar_contacto.js') }}"></script>
+</body>
+</html>
