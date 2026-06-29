@@ -1,0 +1,260 @@
+body{
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: auto auto;
+}
+
+/*Titulo principal de la pagina*/
+h1{
+    align-self:center;
+    color:#0F5199;
+    font-weight: bold;
+    font-size: 70px;
+    position: relative;
+    bottom: 170px;
+    left: 40px;
+
+}
+
+/*Etiqueta individual del titulo principal para darle un color distinto*/
+h1 #li{
+    color: #287233;
+    font-weight:bold;
+}
+
+/*logo principal de ContLi*/
+#logo_entrada{
+    width: 140px;
+    height: 80px;
+    position: relative;
+}
+
+/*Estilo para todo el parrafo*/
+p{
+    color: #000;
+}
+
+/*contenedor de botones(nuevo contacto, favoritos, reporte general y cerrar cesión*/
+.container_botones{
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: right;
+    gap: 50px;
+
+}
+
+/*segunda columna de la pagina principal*/
+.bandeja_entrada{
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+    bottom: 80%;
+}
+
+/*campo que contiene el imput de buscar contactos*/
+#campo_busqueda{
+    display: flex;
+    z-index: 300;
+    background-color: #cccccc;
+    border: none;
+    border-radius: 25px;
+    height: 40px;
+    width: 50%;
+    align-content: center;
+    align-self: center;
+    position: fixed;
+    top: 20px;
+
+}
+
+
+#campo_busqueda input{
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    outline: none;
+
+}
+
+/*contenedor de la tabla con los contactos de la aplicación*/
+#cont_contactos{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    position: relative;
+    bottom: 100px; 
+}
+
+
+#cant_contactos{
+    grid-column: 1;
+    grid-row: 1;
+    font-weight: lighter;
+    font-size: 20px;
+    position: relative;
+    bottom: 50px;
+}
+
+/*clase que recopila a los botones/enlaces del contenedor de botones*/
+.bt{
+    text-decoration: none; 
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    width: 300px;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: lighter;
+}
+
+/*boton especial de orden alfabetico*/
+#sortBtn{
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+    background-color:#287233;
+    color: #fff;
+    bottom: 40px;
+    right: 40px;
+    height: 30px;
+    width: 50px;
+    cursor: pointer;   
+
+}
+
+/*Contenedor principal de la tabla */
+#lista_contactos {
+    width: 100%;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #ffffff;
+    border-radius: 12px; 
+    overflow: hidden;    
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+}
+
+/*Configuración general de la tabla */
+#lista_contactos table {
+    width: 100%;
+    border-collapse: collapse; /* Evita duplicación de espacios fantasmas */
+    border: none;              
+    align-content: center;
+}
+
+/*El Encabezado*/
+#lista_contactos thead {
+    background-color: #f8f9fa;
+}
+
+/*encabezados de la tabla de contatos*/
+#lista_contactos th {
+    padding: 20px 45px;/*el primer número es espacio arriba/abajo; el segundo es a los lados */
+    text-align: left;         
+    color: #303030;          
+    font-weight:bolder;         
+    font-size: 20px;
+    border: none; 
+}
+
+/*El Cuerpo de la tabla*/
+#lista_contactos td {
+    padding: 20px 40px;      
+    color: #212529;           
+    font-size: 18px;
+    vertical-align: middle;   /* Centra el contenido verticalmente */
+    border: none;      
+}
+
+/*Efecto interactivo cuando el usuario pasa por encima de las filas de la tabla*/
+#lista_contactos tbody tr:hover {
+    background-color: #f1f3f5; 
+    transition: background-color 0.2s ease;
+}
+
+/*boton de la barra de busqueda para buscar*/
+#boton_buscar{
+    background-color: transparent;
+    border: none;
+    position: relative;
+    left: 5px;
+    cursor: pointer;
+}
+
+/*icono de la lupa en la barra de busquedas*/
+#icono_busqueda{
+    width: 20px;
+    height: 20px;
+}
+
+/*estilo que permita que un div se vea como una linea divisora*/
+#linea_divisora {
+    width: 3px;
+    height: 140%;
+    background-color: #0F5199;
+    position: relative;
+    right: 50px;
+    top: 70px;
+  
+}
+
+/*boton/enlace para conectar con la pagina de agregar contacto*/
+#boton_agregar{
+    background-color: #287233;
+    color: #ffffff;
+    border: none;
+    font-size: 25px;
+    border-radius: 10px;
+    position: relative;
+    bottom: 60px;
+ 
+}
+
+/*boton/enlace para conectarce con la pagina favoritos*/
+#boton_favoritos{
+    background-color: #0F5199;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: #ffffff;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+    font-size: 25px;
+    position:relative;
+
+}
+  
+/*boton/enlace para conectarce con la pagina de reporte general*/
+#boton_reporte{
+    background-color: #0F5199;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/*boton/enlace para conectarce con la pagina de login/index*/
+#boton_cerrarSecion{
+    background-color: #D32F2F;
+    text-align: center;
+    color: #ffffff;
+    border: none;
+    font-size: 25px;
+    border-radius: 10px;
+    position: relative;
+
+}

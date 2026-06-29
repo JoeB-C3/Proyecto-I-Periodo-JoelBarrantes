@@ -1,0 +1,249 @@
+:root {
+    --green-dark: #2E7D32;
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --transition: background-color 0.3s ease;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #F0F2F5;
+  color: #212121;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color:#1B5E20;
+  padding: 10px;
+  height: 50px;
+  box-shadow: var(--shadow-md);
+}
+
+.back-btn{
+  text-decoration: none;
+  font-size: 25px;
+  color: #000;
+  font-weight: bold;
+  padding: 6px;
+}
+
+.back-btn__arrow{
+  font-size: 35px;
+}
+
+.back-btn:hover{
+
+  background-color: #88888881;
+  border-radius: 10px;
+}
+
+#guardar{
+  background-color: #0F5199;
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  box-shadow: var(--shadow-md);
+  height: 40px;
+  width: 200px;
+
+}
+
+h1{
+  font-size: 30px;
+  color:#fff;
+}
+
+.avatar-preview-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px ;
+  padding: 2rem 1.5rem 1.25rem;
+}
+
+.avatar-preview-wrap p{
+  font-size: 22px;
+  font-weight: lighter;
+}
+
+.avatar-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #76b4fa;
+  border: 3px solid rgba(26, 47, 87, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 1px;
+  transition: background var(--transition), transform 0.3s ease;
+  user-select: none;
+}
+
+.avatar-preview.has-initials {
+  background: #76b4fa;
+  transform: scale(1.04);
+}
+
+.avatar-hint {
+  font-size: 30px;
+  color: #76b4fa;
+  text-align: center;
+}
+
+#formNuevoContacto{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente línea */
+  gap: 20px;
+  padding: 20px;
+}
+
+.bandeja_entrada{
+  position: relative;
+  bottom: 200px;
+}
+
+.form-grid{
+  display: flex;
+  flex-direction: column; /* Alinea la etiqueta arriba y el input abajo */
+  flex: 1 1 calc(50% - 10px); /* 50% de ancho menos la mitad del gap */
+  box-sizing: border-box;
+  gap: 20px;
+  padding: 10px;
+
+}
+
+.form-group{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#formNuevoContacto label{
+  font-weight: 500;
+  font-size: 18px;
+  color: #000;
+}
+
+#formNuevoContacto input, #formNuevoContacto textarea{
+  border: none;
+  background-color: #D9D9D9;
+  padding: 10px 14px;
+  font-size: 16px;
+  outline: none;
+  color: #000;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+
+}
+
+#formNuevoContacto input:focus, #formNuevoContacto textarea:focus{
+  border-color: #0F5199;     /* Cambia el color del borde */
+  box-shadow: 0 0 0 3px #08386b65;
+}
+
+#formNuevoContacto select{
+  appearance: none;          /* Quita la flecha nativa del navegador */
+  width: 50%;
+  padding: 12px 40px 12px 16px; /* Espacio derecho extra para que el texto no tape la flecha */
+  font-size: 16px;
+  color: #000;
+  background-color: #D9D9D9;
+  border: 2px solid #cccccc;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+#formNuevoContacto select:focus {
+  border-color: #0F5199;     /* Cambia el color del borde */
+  box-shadow: 0 0 0 3px #08386b65;
+}
+
+
+.modal-overlay{
+  position: fixed;          /* 1. Rompe el flujo y flota sobre toda la pantalla */
+  top: 0;
+  left: 0;
+  width: 100vw;             /* 2. Ocupa el 100% del ancho de la ventana */
+  height: 100vh;            /* 3. Ocupa el 100% del alto de la ventana */
+  background-color: rgba(0, 0, 0, 0.5); /* 4. Fondo negro con 50% de transparencia */
+  
+  display: flex;            /* 5. Activamos Flexbox */
+  justify-content: center;  /* 6. Centra la cajita horizontalmente */
+  align-items: center;      /* 7. Centra la cajita verticalmente */
+  z-index: 999;             /* 8. Asegura que esté por encima de cualquier otro elemento */
+}
+
+.modal-content{
+  background-color: #FFFFFF; /* Fondo blanco para que resalte del fondo oscuro */
+  width: 90%;                /* Se adapta a pantallas de celulares */
+  max-width: 400px;          /* En computadoras no medirá más de 400px */
+  border-radius: 8px;        /* Bordes redondeados para que se vea moderno */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Sombra profunda para dar efecto de flotación */
+  overflow: hidden;          /* Evita que los colores internos se salgan de las esquinas redondeadas */
+  
+  display: flex;
+  flex-direction: column;
+}
+
+/* Opcional: Estilos internos para que coincida con tu Figma de "Advertencia" */
+.modal-header {
+  background-color: #D32F2F; /* Rojo de advertencia/error */
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.modal-body {
+  padding: 20px;
+  color: #333333;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.modal-footer {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  background-color: #F5F5F5;
+}
+
+.btn-cerrar {
+  background-color: #111111;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background var(--transition);
+}
+
+.btn-cerrar:hover {
+  background-color: #424242;
+}
+
